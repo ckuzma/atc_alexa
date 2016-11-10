@@ -35,23 +35,26 @@ class ResponseBuilder:
         self.object_parsing = ObjectParsing()
 
     def craft_result_response(self, lowest_aircraft):
-        response_text = 'There is currently'
-        if self.object_parsing.get_param(lowest_aircraft, 'operator'):
-            response_text += ' a '
-            response_text += lowest_aircraft['operator']
-        if self.object_parsing.get_param(lowest_aircraft, 'manufacturer'):
-            response_text += ' '
-            response_text += lowest_aircraft['manufacturer']
-        if self.object_parsing.get_param(lowest_aircraft, 'model'):
-            response_text += ' '
-            response_text += lowest_aircraft['model']
-        response_text += ' at '
-        response_text += str(lowest_aircraft['altitude'])
-        response_text += ' feet above the ground nearby.'
-        return response_text
+        if not lowest_aircraft:
+            return 'There are currently no aircraft on radar nearby.'
+        else:
+            response_text = 'There is currently'
+            if self.object_parsing.get_param(lowest_aircraft, 'operator'):
+                response_text += ' a '
+                response_text += lowest_aircraft['operator']
+            if self.object_parsing.get_param(lowest_aircraft, 'manufacturer'):
+                response_text += ' '
+                response_text += lowest_aircraft['manufacturer']
+            if self.object_parsing.get_param(lowest_aircraft, 'model'):
+                response_text += ' '
+                response_text += lowest_aircraft['model']
+            response_text += ' at '
+            response_text += str(lowest_aircraft['altitude'])
+            response_text += ' feet above the ground nearby.'
+            return response_text
 
     def no_location(self):
-        print('Oops! We need your zipcode. Continuing with dummy data for NYC for now...')
+        print('Oops! We need your zipcode. Continuing with dummy data for Portland for now...')
 
 """
 Tests
