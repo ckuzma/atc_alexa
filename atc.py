@@ -5,7 +5,7 @@ from util.location_lookup import LocationLookup
 from util.object_parsing import ObjectParsing
 from util.radar_interpreter import RadarInterpreter
 
-DISTANCE_RADIUS = 20, # Distance radius (2-dimensional) max
+DISTANCE_RADIUS = 10, # Distance radius (2-dimensional) max
 MAX_ALTITUDE = 40000 # Maximum Altitude
 
 class AirTrafficControl:
@@ -17,18 +17,19 @@ class AirTrafficControl:
         self.lat = None
         self.lon = None
 
+    def save_location(self):
+        ## TODO: Make this work
+        pass
+
     def whats_lowest_aircraft(self):
         if self.zipcode is None:
-            self.response_builder.no_location()
+            # self.response_builder.no_location()
             self.zipcode = '10016'
             self.lat, self.lon = self.location_lookup.location_from_zip(self.zipcode)
         radar_scan = self.virtual_radar.get_aircraft(self.lat, self.lon, DISTANCE_RADIUS, MAX_ALTITUDE)
         results = RadarInterpreter(radar_scan)
         return self.response_builder.craft_result_response(results.lowest_aircraft)
 
-    def save_location(self):
-        ## TODO: Make this work
-        pass
 
 class ResponseBuilder:
     def __init__(self):
@@ -50,11 +51,11 @@ class ResponseBuilder:
                 response_text += lowest_aircraft['model']
             response_text += ' at '
             response_text += str(lowest_aircraft['altitude'])
-            response_text += ' feet above the ground nearby.'
+            response_text += ' feet above New York City.'
             return response_text
 
     def no_location(self):
-        print('Oops! We need your zipcode. Continuing with dummy data for Portland for now...')
+        print('Oops! We need your zipcode. Continuing with dummy data for New York for now...')
 
 """
 Tests
