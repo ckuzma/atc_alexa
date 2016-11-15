@@ -1,11 +1,17 @@
+import requests
+
+API_KEY = '<PUT YOUR KEY HERE>'
+GMAPS_URI = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 class LocationLookup:
     def __init__(self):
         pass
 
     def location_from_zip(self, zipcode):
-
-        ## TODO: Implement this
-        coords = [40.7128, -74.0059] # NYC
-        # coords = [45.5231, 122.6765] # Portland
-        return coords[0], coords[1]
+        parameters = {
+            'address': zipcode,
+            'key': API_KEY
+        }
+        response = requests.get(GMAPS_URI, params=parameters).json()
+        location = response['results'][0]['geometry']['location']
+        return location['lat'], location['lng']
