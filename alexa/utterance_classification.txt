@@ -1,0 +1,10 @@
+WhatsOverheadIntent what is flying overhead
+WhatsOverheadIntent is that an airplane or a bird
+WhatsOverheadIntent what kind of aircraft is that
+WhatsOverheadIntent is that a helicopter
+WhatsOverheadIntent are there any planes overhead
+WhatsOverheadIntent tell me what is flying overhead
+WhatsOverheadIntent where is the nearest airplane
+MyLocationIsIntent my zip code is {Location}
+MyLocationIsIntent my location is {Location}
+MyLocationIsIntent I am at {Location}

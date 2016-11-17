@@ -1,0 +1,19 @@
+{
+  "intents": [
+    {
+      "intent": "MyLocationIsIntent",
+      "slots": [
+        {
+          "name": "Location",
+          "type": "LIST_OF_LOCATIONS"
+        }
+      ]
+    },
+    {
+      "intent": "WhatsOverheadIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+   }
+  ]
+}
