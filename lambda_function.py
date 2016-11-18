@@ -2,8 +2,10 @@ from __future__ import print_function
 
 ## Import our classes...
 from atc import AirTrafficControl
+from config import Credentials
 
 ## Initialize our classes...
+credentials = Credentials()
 atc_control = AirTrafficControl()
 
 # --------------- Helpers that build all of the responses ----------------------
@@ -47,12 +49,12 @@ def get_welcome_response():
     session_attributes = {}
     card_title = "Welcome"
     speech_output = "Welcome to Air Traffic Control! " \
-                    "Please tell me your location by saying, " \
-                    "my zip code is 10001."
+                    "You can ask for the lowest aircraft overhead by saying something like: " \
+                    "Tell me what is flying above New York, New York."
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
-    reprompt_text = "Please tell me your zip code by saying, for example, " \
-                    "my zip code is 10001."
+    reprompt_text = "Please try again. You can say: " \
+                    "Tell me what is flying above New York, New York."
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
@@ -60,66 +62,31 @@ def get_welcome_response():
 
 def handle_session_end_request():
     card_title = "Session Ended"
-    speech_output = "Thank you for trying Air Traffic Control!"
+    speech_output = "Air Traffic Control, over and out!"
     # Setting this to true ends the session and exits the skill.
     should_end_session = True
     return build_response({}, build_speechlet_response(
         card_title, speech_output, None, should_end_session))
 
 
-def create_location_attributes(user_location):
-    return {"userLocation": user_location}
-
-
-def set_color_in_session(intent, session):
-    """ Sets the color in the session and prepares the speech to reply to the
-    user.
-    """
-
+def get_radar(intent, session):
     card_title = intent['name']
     session_attributes = {}
-    should_end_session = False
-
     if 'Location' in intent['slots']:
         user_location = intent['slots']['Location']['value']
         atc_control.save_location(user_location)
-        session_attributes = create_location_attributes(user_location)
-        speech_output = "I now know your location is " + \
-                        user_location + \
-                        ". You can ask me what is overhead by saying, " \
-                        "what's flying overhead?"
-        reprompt_text = ". You can ask me what is overhead by saying, " \
-                        "what's flying overhead?"
-    else:
-        speech_output = "I'm not sure what your location is. " \
-                        "Please try again."
-        reprompt_text = "I'm not sure what your location is. " \
-                        "You can tell me your location by saying, for example, " \
-                        "my zip code is 10001."
-    return build_response(session_attributes, build_speechlet_response(
-        card_title, speech_output, reprompt_text, should_end_session))
-
-
-def get_color_from_session(intent, session):
-    session_attributes = {}
-    reprompt_text = None
-
-    if session.get('attributes', {}) and "userLocation" in session.get('attributes', {}):
-        user_location = session['attributes']['userLocation']
         speech_output = atc_control.whats_lowest_aircraft()
-        # speech_output = "Your location is " + user_location + \
-        #                 ". Goodbye."
+        reprompt_text = ""
         should_end_session = True
     else:
-        speech_output = "I'm not sure what your location is. " \
-                        "You can say, for example, my zip code is 10001."
+        speech_output = "I couldn\'t find that location. " \
+                        "Please try again."
+        reprompt_text = "I\'m not sure what your location is. " \
+                        "Please try again, for example: " \
+                        "What is flying over New York, New York?"
         should_end_session = False
-
-    # Setting reprompt_text to None signifies that we do not want to reprompt
-    # the user. If the user does not respond or says something that is not
-    # understood, the session will end.
     return build_response(session_attributes, build_speechlet_response(
-        intent['name'], speech_output, reprompt_text, should_end_session))
+        card_title, speech_output, reprompt_text, should_end_session))
 
 
 # --------------- Events ------------------
@@ -152,10 +119,8 @@ def on_intent(intent_request, session):
     intent_name = intent_request['intent']['name']
 
     # Dispatch to your skill's intent handlers
-    if intent_name == "MyLocationIsIntent":
-        return set_color_in_session(intent, session)
-    elif intent_name == "WhatsOverheadIntent":
-        return get_color_from_session(intent, session)
+    if intent_name == "WhatsOverheadIntent":
+        return get_radar(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
     elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":
@@ -171,7 +136,6 @@ def on_session_ended(session_ended_request, session):
     """
     print("on_session_ended requestId=" + session_ended_request['requestId'] +
           ", sessionId=" + session['sessionId'])
-    # add cleanup logic here
 
 
 # --------------- Main handler ------------------
@@ -188,9 +152,9 @@ def lambda_handler(event, context):
     prevent someone else from configuring a skill that sends requests to this
     function.
     """
-    # if (event['session']['application']['applicationId'] !=
-    #         "amzn1.echo-sdk-ams.app.[unique-value-here]"):
-    #     raise ValueError("Invalid Application ID")
+    if (event['session']['application']['applicationId'] !=
+            credentials.alexa_id):
+        raise ValueError("Invalid Application ID")
 
     if event['session']['new']:
         on_session_started({'requestId': event['request']['requestId']},
