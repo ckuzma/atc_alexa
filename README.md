@@ -1,3 +1,5 @@
+![Logo for Air Traffic Control](https://github.com/ckuzma/atc_alexa/blob/master/misc/atc_large.png)
+
 # atc_alexa
 Air Traffic Control skill for Amazon Alexa
 
