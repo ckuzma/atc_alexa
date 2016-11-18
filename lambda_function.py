@@ -2,10 +2,8 @@ from __future__ import print_function
 
 ## Import our classes...
 from atc import AirTrafficControl
-from config import Credentials
 
 ## Initialize our classes...
-credentials = Credentials()
 atc_control = AirTrafficControl()
 
 # --------------- Helpers that build all of the responses ----------------------
@@ -18,8 +16,8 @@ def build_speechlet_response(title, output, reprompt_text, should_end_session):
         },
         'card': {
             'type': 'Simple',
-            'title': "SessionSpeechlet - " + title,
-            'content': "SessionSpeechlet - " + output
+            'title': title,
+            'content': output
         },
         'reprompt': {
             'outputSpeech': {
@@ -48,21 +46,21 @@ def get_welcome_response():
 
     session_attributes = {}
     card_title = "Welcome"
-    speech_output = "Welcome to Air Traffic Control! " \
-                    "You can ask for the lowest aircraft overhead by saying something like: " \
-                    "Tell me what is flying above New York, New York."
+    speech_output = "Air Traffic Control. " \
+                    "Ask for the lowest aircraft over a location by saying: " \
+                    "Tell me what is flying above New York."
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
     reprompt_text = "Please try again. You can say: " \
-                    "Tell me what is flying above New York, New York."
+                    "Tell me what is flying above New York."
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
 
 def handle_session_end_request():
-    card_title = "Session Ended"
-    speech_output = "Air Traffic Control, over and out!"
+    card_title = "Goodbye"
+    speech_output = "Goodbye from Air Traffic Control!"
     # Setting this to true ends the session and exits the skill.
     should_end_session = True
     return build_response({}, build_speechlet_response(
@@ -70,19 +68,27 @@ def handle_session_end_request():
 
 
 def get_radar(intent, session):
-    card_title = intent['name']
+    card_title = "Get Radar"
     session_attributes = {}
-    if 'Location' in intent['slots']:
+    location_status = None
+    if 'Location' in intent['slots'] and 'value' in intent['slots']['Location']:
         user_location = intent['slots']['Location']['value']
-        atc_control.save_location(user_location)
+        location_status = atc_control.save_location(user_location)
         speech_output = atc_control.whats_lowest_aircraft()
         reprompt_text = ""
         should_end_session = True
     else:
-        speech_output = "I couldn\'t find that location. " \
+        speech_output = "Couldn\'t find that location. " \
                         "Please try again."
-        reprompt_text = "I\'m not sure what your location is. " \
-                        "Please try again, for example: " \
+        reprompt_text = "I\'m having trouble finding that locatio.n " \
+                        "Try saying: " \
+                        "What is flying over New York, New York?"
+        should_end_session = False
+    if location_status is None:
+        speech_output = "Couldn\'t find that location. " \
+                        "Please try again."
+        reprompt_text = "I\'m having trouble finding that location. " \
+                        "Try saying: " \
                         "What is flying over New York, New York?"
         should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
@@ -153,7 +159,7 @@ def lambda_handler(event, context):
     function.
     """
     if (event['session']['application']['applicationId'] !=
-            credentials.alexa_id):
+            "amzn1.ask.skill.6d30ba2f-9081-4d6c-9db8-3fd59f61eb49"):
         raise ValueError("Invalid Application ID")
 
     if event['session']['new']:

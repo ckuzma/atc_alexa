@@ -16,5 +16,7 @@ class GoogleMaps:
             'key': API_KEY
         }
         response = requests.get(GMAPS_URI, params=parameters).json()
+        if len(response['results']) == 0:
+            return None, None
         location = response['results'][0]['geometry']['location']
         return location['lat'], location['lng']

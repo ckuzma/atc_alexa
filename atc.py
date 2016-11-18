@@ -18,12 +18,19 @@ class AirTrafficControl:
     def save_location(self, location):
         self.location = location
         self.lat, self.lon = self.google_maps.location_from_address(location)
+        if self.lat is None or self.lon is None:
+            print('Returning None')
+            return None
         return self.response_builder.saved_location(location)
 
     def whats_lowest_aircraft(self):
         if self.lat is None or self.lat is None:
             return self.response_builder.no_location_given()
-        radar_scan = self.virtual_radar.get_aircraft(self.lat, self.lon, DISTANCE_RADIUS, MAX_ALTITUDE)
+        try:
+            radar_scan = self.virtual_radar.get_aircraft(self.lat, self.lon, DISTANCE_RADIUS, MAX_ALTITUDE)
+        except:
+            print('ERROR: Unable to get virtual radar!')
+            return self.response_builder.craft_result_response(None, self.location)
         results = RadarInterpreter(radar_scan)
         return self.response_builder.craft_result_response(results.lowest_aircraft, self.location)
 
@@ -36,7 +43,7 @@ class ResponseBuilder:
         if not lowest_aircraft:
             return 'There are currently no aircraft on radar near ' + location + '.'
         else:
-            response_text = 'The lowest aircraft overhead'
+            response_text = 'The lowest aircraft over ' + location + ' '
             if self.object_parsing.get_param(lowest_aircraft, 'operator'):
                 response_text += 'is a '
                 response_text += lowest_aircraft['operator']
@@ -46,13 +53,11 @@ class ResponseBuilder:
             if self.object_parsing.get_param(lowest_aircraft, 'model'):
                 response_text += ' '
                 response_text += lowest_aircraft['model']
-            if response_text == 'The lowest aircraft overhead': # If we got no aircraft information
-                response_text += ' has no public information and is'
+            if response_text == 'The lowest aircraft over ' + location + ' ': # If we got no aircraft information
+                response_text += 'has no public information and is'
             response_text += ' at '
             response_text += str(lowest_aircraft['altitude'])
-            response_text += ' feet within '
-            response_text += '20' # XXX Needs to match DISTANCE_RADIUS
-            response_text += ' kilometers of ' + location + '.'
+            response_text += ' feet.'
             return response_text
 
     def no_location_given(self):

@@ -16,7 +16,6 @@ WhatsOverheadIntent what lowest flying thing over {Location} is
 WhatsOverheadIntent lowest aircraft for {Location}
 WhatsOverheadIntent if there are any aircraft near {Location}
 WhatsOverheadIntent are there any aircraft near {Location}
-WhatsOverheadIntent {Location}
 WhatsOverheadIntent the lowest helicopter in {Location}
 WhatsOverheadIntent the lowest aircraft in {Location}
 WhatsOverheadIntent the lowest airplane in {Location}
