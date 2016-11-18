@@ -1,13 +1,16 @@
 import requests
 
-API_KEY = '<PUT YOUR KEY HERE>'
+from config import Credentials
+credentials = Credentials()
+
+API_KEY = credentials.gmap_key
 GMAPS_URI = 'https://maps.googleapis.com/maps/api/geocode/json'
 
-class LocationLookup:
+class GoogleMaps:
     def __init__(self):
         pass
 
-    def location_from_zip(self, zipcode):
+    def location_from_address(self, zipcode):
         parameters = {
             'address': zipcode,
             'key': API_KEY

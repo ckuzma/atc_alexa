@@ -1,0 +1,12 @@
+"""
+Instructions:
+  1. Remove the .example from this file's name (making it simply config.py)
+  2. Add your Google Maps Geocoding API key and Alexa App ID below
+  3. ???
+  4. Profit
+"""
+
+class Credentials:
+    def __init__(self):
+        self.gmap_key = 'YOUR GOOGLE MAPS GEOCODING API HERE'
+        self.alexa_id = 'YOUR ALEXA APP ID HERE'
