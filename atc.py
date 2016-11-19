@@ -11,29 +11,20 @@ class AirTrafficControl:
         self.virtual_radar = VirtualRadar()
         self.google_maps = GoogleMaps()
         self.response_builder = ResponseBuilder()
-        self.location = None
-        self.lat = None
-        self.lon = None
 
-    def save_location(self, location):
-        self.location = location
-        self.lat, self.lon = self.google_maps.location_from_address(location)
-        if self.lat is None or self.lon is None:
-            print('Returning None')
+    def get_lowest_aircraft(self, user_location_string):
+        location, latitude, longitude = self.google_maps.location_from_address(user_location_string)
+        if location is None:
+            print('WARNING: Unable to lookup a location')
             return None
-        return self.response_builder.saved_location(location)
-
-    def whats_lowest_aircraft(self):
-        if self.lat is None or self.lat is None:
-            return self.response_builder.no_location_given()
-        try:
-            radar_scan = self.virtual_radar.get_aircraft(self.lat, self.lon, DISTANCE_RADIUS, MAX_ALTITUDE)
-        except:
-            print('ERROR: Unable to get virtual radar!')
-            return self.response_builder.craft_result_response(None, self.location)
-        results = RadarInterpreter(radar_scan)
-        return self.response_builder.craft_result_response(results.lowest_aircraft, self.location)
-
+        else:
+            try:
+                radar_scan = self.virtual_radar.get_aircraft(latitude, longitude, DISTANCE_RADIUS, MAX_ALTITUDE)
+                results = RadarInterpreter(radar_scan)
+                return self.response_builder.craft_result_response(results.lowest_aircraft, location)
+            except:
+                print('ERROR: Unable to get virtual radar')
+            return False
 
 class ResponseBuilder:
     def __init__(self):
@@ -60,21 +51,10 @@ class ResponseBuilder:
             response_text += ' feet.'
             return response_text
 
-    def no_location_given(self):
-        response_text = 'I don\'t have your location! Tell me where you are.'
-        return response_text
-
-    def saved_location(self, location):
-        response_text = 'Great! I have your location as '
-        response_text += str(location)
-        response_text += '.'
-        return response_text
-
 if __name__ == '__main__':
     print('\n\n\tRunning demonstration...\n')
 
     atc = AirTrafficControl()
-    print(atc.save_location('new york new york'))
-    print(atc.whats_lowest_aircraft())
+    print(atc.get_lowest_aircraft('Blimey'))
 
     print('\n\tDone running demonstration!\n\n')

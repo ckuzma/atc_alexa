@@ -15,8 +15,13 @@ class GoogleMaps:
             'address': zipcode,
             'key': API_KEY
         }
-        response = requests.get(GMAPS_URI, params=parameters).json()
+        try:
+            response = requests.get(GMAPS_URI, params=parameters).json()
+        except:
+            print('ERROR: Unable to communicate with Google API')
+            return None, None, None
         if len(response['results']) == 0:
-            return None, None
+            return None, None, None
         location = response['results'][0]['geometry']['location']
-        return location['lat'], location['lng']
+        print('WARNING: Fix Google API usage, using dummy New York for name of location')
+        return 'New York', location['lat'], location['lng']

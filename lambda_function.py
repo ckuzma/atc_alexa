@@ -49,8 +49,6 @@ def get_welcome_response():
     speech_output = "Air Traffic Control. " \
                     "Ask for the lowest aircraft over a location by saying: " \
                     "Tell me what is flying above New York."
-    # If the user either does not reply to the welcome message or says something
-    # that is not understood, they will be prompted again with this text.
     reprompt_text = "Please try again. You can say: " \
                     "Tell me what is flying above New York."
     should_end_session = False
@@ -73,23 +71,29 @@ def get_radar(intent, session):
     location_status = None
     if 'Location' in intent['slots'] and 'value' in intent['slots']['Location']:
         user_location = intent['slots']['Location']['value']
-        location_status = atc_control.save_location(user_location)
-        speech_output = atc_control.whats_lowest_aircraft()
+        result = atc_control.get_lowest_aircraft(user_location)
+        if result is None:
+            speech_output = "Couldn\'t find that location. " \
+                            "Please try again."
+            reprompt_text = "I\'m having trouble finding that locatio.n " \
+                            "Try saying: " \
+                            "What is flying over New York"
+            should_end_session = False
+        if result is False:
+            speech_output = "Radar isn\'t responding. " \
+                            "Please try again later."
+            reprompt_text = "I\'m having trouble communicating with the radar. " \
+                            "Please try again later."
+            should_end_session = True
+        speech_output = result
         reprompt_text = ""
         should_end_session = True
     else:
-        speech_output = "Couldn\'t find that location. " \
+        speech_output = "Couldn\'t identify a location in your request. " \
                         "Please try again."
-        reprompt_text = "I\'m having trouble finding that locatio.n " \
-                        "Try saying: " \
-                        "What is flying over New York, New York?"
-        should_end_session = False
-    if location_status is None:
-        speech_output = "Couldn\'t find that location. " \
-                        "Please try again."
-        reprompt_text = "I\'m having trouble finding that location. " \
-                        "Try saying: " \
-                        "What is flying over New York, New York?"
+        reprompt_text = "Did you put a valid location? Try again. " \
+                        "Try something like: " \
+                        "What is flying over New York"
         should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
