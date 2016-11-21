@@ -16,12 +16,7 @@ class GoogleMaps:
             'key': API_KEY
         }
         try:
-            response = requests.get(GMAPS_URI, params=parameters).json()
+            return requests.get(GMAPS_URI, params=parameters, timeout=2).json()
         except:
             print('ERROR: Unable to communicate with Google API')
-            return None, None, None
-        if len(response['results']) == 0:
-            return None, None, None
-        location = response['results'][0]['geometry']['location']
-        print('WARNING: Fix Google API usage, using dummy New York for name of location')
-        return 'New York', location['lat'], location['lng']
+            return None

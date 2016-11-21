@@ -1,17 +1,25 @@
-# import json
+from atc import AirTrafficControl
 
-# from api.virtual_radar import VirtualRadar
-# from api.google_maps import GoogleMaps
-# import requests
+atc_control = AirTrafficControl()
 
-## Virtual Radar
-# virtual_radar = VirtualRadar()
-# print(json.dumps(virtual_radar.get_aircraft(40.7128, -74.0059, 20, 40000), indent=2))
+locations = [
+    'portland',
+    'denver',
+    'new york',
+    'barcelona',
+    'cleveland',
+    'narnia',
+    'this shouldn\'t have a match',
+]
 
-## Location Lookup
-# google_maps = GoogleMaps()
-# print(location_lookup.location_from_address('10006'))
+print('\n\t----[ TEST: Lowest aircraft for location ]----')
+for entry in locations:
+    print(entry)
+    print(atc_control.get_lowest_aircraft(entry))
+    print('')
 
-## Requests test
-# response = requests.get('http://www.google.com')
-# print(response.text)
+print('\n\t----[ TEST: Highest aircraft for location ]----')
+for entry in locations:
+    print(entry)
+    print(atc_control.get_highest_aircraft(entry))
+    print('')

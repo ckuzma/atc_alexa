@@ -2,9 +2,11 @@ from __future__ import print_function
 
 ## Import our classes...
 from atc import AirTrafficControl
+from config import Credentials
 
 ## Initialize our classes...
 atc_control = AirTrafficControl()
+credentials = Credentials()
 
 # --------------- Helpers that build all of the responses ----------------------
 
@@ -47,8 +49,7 @@ def get_welcome_response():
     session_attributes = {}
     card_title = "Welcome"
     speech_output = "Air Traffic Control. " \
-                    "Ask for the lowest aircraft over a location by saying: " \
-                    "Tell me what is flying above New York."
+                    "You can ask me what is flying over any location."
     reprompt_text = "Please try again. You can say: " \
                     "Tell me what is flying above New York."
     should_end_session = False
@@ -71,29 +72,14 @@ def get_radar(intent, session):
     location_status = None
     if 'Location' in intent['slots'] and 'value' in intent['slots']['Location']:
         user_location = intent['slots']['Location']['value']
-        result = atc_control.get_lowest_aircraft(user_location)
-        if result is None:
-            speech_output = "Couldn\'t find that location. " \
-                            "Please try again."
-            reprompt_text = "I\'m having trouble finding that locatio.n " \
-                            "Try saying: " \
-                            "What is flying over New York"
-            should_end_session = False
-        if result is False:
-            speech_output = "Radar isn\'t responding. " \
-                            "Please try again later."
-            reprompt_text = "I\'m having trouble communicating with the radar. " \
-                            "Please try again later."
-            should_end_session = True
-        speech_output = result
-        reprompt_text = ""
-        should_end_session = True
+        speech_output = atc_control.get_lowest_aircraft(user_location)
+        reprompt_text = "You can make a request, or say \"quit\" or \"cancel\" to exit."
+        should_end_session = False
     else:
-        speech_output = "Couldn\'t identify a location in your request. " \
+        speech_output = "You did not give a valid location. " \
                         "Please try again."
-        reprompt_text = "Did you put a valid location? Try again. " \
-                        "Try something like: " \
-                        "What is flying over New York"
+        reprompt_text = "I did not recognize a location. Try something like: " \
+                        "What is flying over New York."
         should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
@@ -129,7 +115,7 @@ def on_intent(intent_request, session):
     intent_name = intent_request['intent']['name']
 
     # Dispatch to your skill's intent handlers
-    if intent_name == "WhatsOverheadIntent":
+    if intent_name == "LowestAircraftIntent":
         return get_radar(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
@@ -163,7 +149,7 @@ def lambda_handler(event, context):
     function.
     """
     if (event['session']['application']['applicationId'] !=
-            "amzn1.ask.skill.6d30ba2f-9081-4d6c-9db8-3fd59f61eb49"):
+            credentials.alexa_id):
         raise ValueError("Invalid Application ID")
 
     if event['session']['new']:
