@@ -18,6 +18,10 @@ class AirTrafficControl:
         self.response_builder = ResponseBuilder()
 
     def get_location(self, user_location_string):
+        """
+        Returns a nice little object that has the latitude and
+        longitude corresponding to the location from the user.
+        """
         location = self.google_maps.location_from_address(user_location_string)
         if location == None:
             return None
@@ -26,6 +30,10 @@ class AirTrafficControl:
             return location
 
     def get_aircraft(self, user_location_string):
+        """
+        Returns a list of all aircraft found for that location, or
+        a null value if none are found or if an IO error.
+        """
         location = self.get_location(user_location_string)
         if location == None:
             print('DEBUG: Unable to get user location (' + user_location_string + ')')
@@ -41,6 +49,9 @@ class AirTrafficControl:
         return aircraft
 
     def get_highest_aircraft(self, user_location_string):
+        """
+        Returns a string.
+        """
         aircraft = self.get_aircraft(user_location_string)
         if not aircraft:
             return self.response_builder.craft_result_response(None, user_location_string)
@@ -51,6 +62,9 @@ class AirTrafficControl:
         return self.response_builder.craft_result_response(highest_craft, user_location_string)
 
     def get_lowest_aircraft(self, user_location_string):
+        """
+        Returns a string.
+        """
         aircraft = self.get_aircraft(user_location_string)
         if not aircraft:
             return self.response_builder.craft_result_response(None, user_location_string)
@@ -66,6 +80,10 @@ class ResponseBuilder:
         self.object_parsing = ObjectParsing()
 
     def craft_result_response(self, aircraft, location):
+        """
+        This is where we craft our nice natural-language response
+        including all of the information we have been able to get.
+        """
           if not aircraft:
               return 'There are currently no aircraft on radar near ' + location + '.'
           else:
