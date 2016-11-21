@@ -4,8 +4,8 @@
 Air Traffic Control skill for Amazon Alexa
 
 ## Alexa Skill Deployment Status:
-2016.11.17 @ 19:15 -- Submitted for certification
-2016.11.20 @ 20:02 -- Re-submitted with updates for certification
+* (2016.11.17 @ 19:15) Submitted for certification
+* (2016.11.20 @ 20:02) Re-submitted with updates for certification
 
 ## How It Works
 Given a location (string) by a user, we query the Google Maps API for the approximate latitude and longitude corresponding to it. We then query the ADS-B Exchange for any radar data within a 20-kilometer radius and return information about the one flying the lowest.
