@@ -1,9 +1,8 @@
 from util.object_parsing import ObjectParsing
 
 class RadarInterpreter:
-    def __init__(self, radar_blob):
+    def __init__(self):
         self.object_parsing = ObjectParsing()
-        self.aircraft_list, self.lowest_aircraft = self.extract_aircraft(radar_blob['acList'])
 
     def extract_aircraft(self, raw_aircrafts):
         """
@@ -17,7 +16,6 @@ class RadarInterpreter:
             Engines Number of engines on the aircraft
         """
         aircraft_list = []
-        lowest_aircraft = None
         for aircraft in raw_aircrafts:
             aircraft_info = {
                 'manufacturer': self.object_parsing.get_param(aircraft, 'Man'),
@@ -30,11 +28,7 @@ class RadarInterpreter:
             }
             if aircraft_info['operator']: # Have to clean this up a bit
                 operator = aircraft_info['operator']
-                operator = operator.split('     ')
-                aircraft_info['operator'] = operator[0]
+                operator = operator.split(' ')
+                aircraft_info['operator'] = ' '.join(operator[0:2]).lower()
             aircraft_list.append(aircraft_info)
-            if lowest_aircraft is None and 'altitude' in aircraft_info and aircraft_info['altitude'] > 0:
-                lowest_aircraft = aircraft_info
-            if 'altitude' in aircraft_info and aircraft_info['altitude'] > 0 and aircraft_info['altitude'] < lowest_aircraft['altitude']:
-                lowest_aircraft = aircraft_info
-        return aircraft_list, lowest_aircraft
+        return aircraft_list

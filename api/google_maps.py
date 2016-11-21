@@ -15,8 +15,8 @@ class GoogleMaps:
             'address': zipcode,
             'key': API_KEY
         }
-        response = requests.get(GMAPS_URI, params=parameters).json()
-        if len(response['results']) == 0:
-            return None, None
-        location = response['results'][0]['geometry']['location']
-        return location['lat'], location['lng']
+        try:
+            return requests.get(GMAPS_URI, params=parameters, timeout=2).json()
+        except:
+            print('ERROR: Unable to communicate with Google API')
+            return None
