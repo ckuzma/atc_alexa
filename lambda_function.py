@@ -74,10 +74,17 @@ def get_radar(intent, session):
         user_location = intent['slots']['Location']['value']
         speech_output = atc_control.get_lowest_aircraft(user_location)
         reprompt_text = "You can make a request, or say \"quit\" or \"cancel\" to exit."
-        if session['new'] is True:
-            should_end_session = True
-        else:
-            should_end_session = False
+        should_end_session = True
+
+        ## XXX: Uncomment the code below if you want to leave the session open
+        ## when the user has "opened" the app skill instead of just asked Alexa
+        ## to ask the skill for a single answer:
+        # if session['new'] is True:
+        #     should_end_session = True
+        # else:
+        #     speech_output += " You can make another request, or say \"quit\" or \"cancel\" to exit."
+        #     should_end_session = False
+
     else:
         speech_output = "You did not give a valid location. " \
                         "Please try again."
