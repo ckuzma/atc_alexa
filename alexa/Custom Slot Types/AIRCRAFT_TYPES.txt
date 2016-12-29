@@ -1,0 +1,8 @@
+airplanes
+seaplanes
+amphibians
+helicopters
+gyrocopters
+tiltwings
+ground vehicles
+towers

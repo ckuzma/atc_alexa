@@ -69,22 +69,11 @@ def handle_session_end_request():
 def get_radar(intent, session):
     card_title = "Get Radar"
     session_attributes = {}
-    location_status = None
     if 'Location' in intent['slots'] and 'value' in intent['slots']['Location']:
         user_location = intent['slots']['Location']['value']
-        speech_output = atc_control.get_lowest_aircraft(user_location)
+        speech_output = get_intent_speech(intent, user_location)
         reprompt_text = "You can make a request, or say \"quit\" or \"cancel\" to exit."
         should_end_session = True
-
-        ## XXX: Uncomment the code below if you want to leave the session open
-        ## when the user has "opened" the app skill instead of just asked Alexa
-        ## to ask the skill for a single answer:
-        # if session['new'] is True:
-        #     should_end_session = True
-        # else:
-        #     speech_output += " You can make another request, or say \"quit\" or \"cancel\" to exit."
-        #     should_end_session = False
-
     else:
         speech_output = "You did not give a valid location. " \
                         "Please try again."
@@ -93,6 +82,37 @@ def get_radar(intent, session):
         should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
+
+def get_intent_speech(intent, location):
+    if intent['name'] == 'AircraftCountIntent':
+        return atc_control.aircraft_count(location)
+    if intent['name'] == 'AircraftCountSpecificIntent':
+        return atc_control.aircraft_count_specific(location)
+    if intent['name'] == 'AircraftOfTypeIntent':
+        craft_type = None
+        if intent['slots']['CraftType']['value'] == 'airplanes':
+            craft_type = 1
+        if intent['slots']['CraftType']['value'] == 'seaplanes':
+            craft_type = 2
+        if intent['slots']['CraftType']['value'] == 'amphibians':
+            craft_type = 3
+        if intent['slots']['CraftType']['value'] == 'helicopters':
+            craft_type = 4
+        if intent['slots']['CraftType']['value'] == 'gyrocopters':
+            craft_type = 5
+        if intent['slots']['CraftType']['value'] == 'tiltwings':
+            craft_type = 6
+        if intent['slots']['CraftType']['value'] == 'ground vehicles':
+            craft_type = 7
+        if intent['slots']['CraftType']['value'] == 'towers':
+            craft_type = 8
+        if craft_type is not None:
+            return atc_control.aircraft_of_type(location, craft_type)
+        return 'I did not recognize the type of aircraft you were asking about, please try again.'
+    if intent['name'] == 'HighestAircraftIntent':
+        return atc_control.highest_aircraft(location)
+    if intent['name'] == 'LowestAircraftIntent':
+        return atc_control.lowest_aircraft(location)
 
 
 # --------------- Events ------------------
@@ -125,7 +145,12 @@ def on_intent(intent_request, session):
     intent_name = intent_request['intent']['name']
 
     # Dispatch to your skill's intent handlers
-    if intent_name == "LowestAircraftIntent":
+    custom_intents = [    'AircraftCountIntent',
+                        'AircraftCountSpecificIntent',
+                        'AircraftOfTypeIntent',
+                        'HighestAircraftIntent',
+                        'LowestAircraftIntent']
+    if intent_name in custom_intents:
         return get_radar(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()

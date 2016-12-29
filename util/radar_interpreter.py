@@ -20,6 +20,7 @@ class RadarInterpreter:
             aircraft_info = {
                 'manufacturer': self.object_parsing.get_param(aircraft, 'Man'),
                 'model': self.object_parsing.get_param(aircraft, 'Type'),
+                'craft_type': self.object_parsing.get_param(aircraft, 'Species'),
                 'operator': self.object_parsing.get_param(aircraft, 'Op'),
                 'flight_num': self.object_parsing.get_param(aircraft, 'Call'),
                 'from': self.object_parsing.get_param(aircraft, 'From'),
