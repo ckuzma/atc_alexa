@@ -1,0 +1,62 @@
+{
+  "intents": [
+    {
+      "intent": "AircraftCountIntent",
+      "slots": [
+        {
+          "name": "Location",
+          "type": "AMAZON.DE_CITY"
+        }
+      ]
+    },
+    {
+      "intent": "AircraftCountSpecificIntent",
+      "slots": [
+        {
+          "name": "Location",
+          "type": "AMAZON.DE_CITY"
+        }
+      ]
+    },
+    {
+      "intent": "AircraftOfTypeIntent",
+      "slots": [
+        {
+          "name": "CraftType",
+          "type": "AIRCRAFT_TYPES"
+        },
+        {
+          "name": "Location",
+          "type": "AMAZON.DE_CITY"
+        }
+      ]
+    },
+    {
+      "intent": "HighestAircraftIntent",
+      "slots": [
+        {
+          "name": "Location",
+          "type": "AMAZON.DE_CITY"
+        }
+      ]
+    },
+    {
+      "intent": "LowestAircraftIntent",
+      "slots": [
+        {
+          "name": "Location",
+          "type": "AMAZON.DE_CITY"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}

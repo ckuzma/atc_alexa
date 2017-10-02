@@ -1,0 +1,49 @@
+AircraftCountIntent gibt es etwas über {Location}
+AircraftCountIntent gibt es etwas in der Luft über {Location}
+AircraftCountIntent ob es Flugmaschine in der Nähe von {Location} gibt
+AircraftCountIntent wie viele Flugzeuge sind oben {Location}
+AircraftCountIntent ist etwas fliegen über {Location}
+AircraftCountIntent ob es gibt Flugzeuge in der Umgebung von {Location}
+AircraftCountIntent wie viele Gefährten sind über {Location}
+AircraftCountIntent wie viele Dinge sind nähe {Location}
+
+AircraftCountSpecificIntent what aircraft are in {Location}
+AircraftCountSpecificIntent what aircraft are in the {Location} area
+AircraftCountSpecificIntent what types of vehicles are over {Location}
+AircraftCountSpecificIntent are a lot of different aircraft over {Location}
+AircraftCountSpecificIntent what kind of things are above {Location}
+AircraftCountSpecificIntent how many kinds of objects are flying at {Location}
+AircraftCountSpecificIntent which aircraft are over {Location}
+
+AircraftOfTypeIntent how many {CraftType} are over {Location}
+AircraftOfTypeIntent are there any {CraftType} over {Location}
+AircraftOfTypeIntent are there {CraftType} flying above {Location}
+AircraftOfTypeIntent what {CraftType} are near {Location}
+
+HighestAircraftIntent what is the highest airplane near {Location}
+HighestAircraftIntent what's the highest aircraft over {Location}
+HighestAircraftIntent the highest thing above {Location}
+HighestAircraftIntent highest flying object for {Location}
+HighestAircraftIntent what is the farthest aircraft in {Location}
+HighestAircraftIntent what is the farthest aircraft to {Location}
+HighestAircraftIntent what is the highest airplane at {Location}
+HighestAircraftIntent what is the highest airplane in {Location}
+HighestAircraftIntent what is the highest airplane to {Location}
+HighestAircraftIntent what is the highest airplane over {Location} is
+HighestAircraftIntent what the highest aircraft over {Location} is
+HighestAircraftIntent what the highest flying thing over {Location} is
+HighestAircraftIntent highest aircraft for {Location}
+
+LowestAircraftIntent what is flying over {Location}
+LowestAircraftIntent what is flying above {Location}
+LowestAircraftIntent what is flying in {Location}
+LowestAircraftIntent what is the nearest aircraft in {Location}
+LowestAircraftIntent what is the nearest aircraft to {Location}
+LowestAircraftIntent what is the lowest airplane at {Location}
+LowestAircraftIntent what is the lowest airplane in {Location}
+LowestAircraftIntent what is the lowest airplane to {Location}
+LowestAircraftIntent what is the lowest airplane over {Location} is
+LowestAircraftIntent what the lowest aircraft over {Location} is
+LowestAircraftIntent what the lowest flying thing over {Location} is
+LowestAircraftIntent lowest aircraft for {Location}
+LowestAircraftIntent are there any aircraft near {Location}
