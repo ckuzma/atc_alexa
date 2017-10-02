@@ -8,6 +8,7 @@ from util.radar_interpreter import RadarInterpreter
 
 DISTANCE_RADIUS = 20, # Distance radius (2-dimensional) max
 MAX_ALTITUDE = 40000 # Maximum Altitude
+MAX_ALTITUDE = 80000 # Maximum Altitude
 
 class AirTrafficControl:
     def __init__(self):
