@@ -71,7 +71,7 @@ def interpret_language(locale):
     if locale == 'de-DE':
         return 'de-de'
     if locale == 'en-UK':
-        reeturn 'en-uk'
+        return 'en-uk'
     if local == 'en-US':
         return 'en-us'
 
