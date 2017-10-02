@@ -191,7 +191,10 @@ class AirTrafficControl:
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
 
-if __name__ == '__main__':
+"""
+Tests:
+"""
+# if __name__ == '__main__':
     # print('\n--- DE (DE) Tests --')
     # atc = AirTrafficControl('de-de')
     # print(atc.aircraft_count('Los Angeles'))
