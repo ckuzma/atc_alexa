@@ -34,10 +34,15 @@ DE-DE
 7.) Es gibt {zwei} {Flugzeuge}, {ein} {Wasserflugzeug}, und {einen} {Hubschrauber} über {Portland} auf unserem Radar.
 """
 
+## Import libraries
+import json
+
+## Import our static strings...
+STATIC_STRINGS = json.loads(open('strings/static.json', 'r').read())
+
 class ResponseGenerator:
     def __init__(self, lang):
         self.lang = lang
-        self.generate_static()
     
     def generate_aircraft_details(self, craft):
         return_string = []
@@ -69,41 +74,7 @@ class ResponseGenerator:
         return ' '.join(return_string)
 
     def generate_aircraft(self, craft_type, number):
-        aircraft_nouns = {
-            'de-de' : [
-                ['Flugmaschine', 'Flugmaschinen'], # f
-                ['Flugzeug', 'Flugzeuge'], # n
-                ['Wasserflugzeug', 'Wasserflugzeuge'], # n
-                ['Amphibienflugzeug', 'Amphibienflugzeuge'], # n
-                ['Hubschrauber', 'Hubschrauber'], # m
-                ['Tragschrauber', 'Tragschrauber'], # m
-                ['VTOL-Flugzeug', 'VTOL-Flugzeuge'], # n
-                ['Landfahrzeug', 'Landfahrzeuge'], # n
-                ['Turm', 'Türme'] # m
-            ],
-            'en-uk' : [
-                ['aircraft', 'aircraft'],
-                ['aeroplane', 'aeroplanes'],
-                ['seaplane', 'seaplanes'],
-                ['amphibious aircraft', 'amphibious aircraft'],
-                ['helicopter', 'helicopters'],
-                ['gyrocopter', 'gyrocopters'],
-                ['tiltwing', 'tiltwings'],
-                ['ground vehicle', 'ground vehicles'],
-                ['tower', 'towers']
-            ],
-            'en-us' : [
-                ['aircraft', 'aircraft'],
-                ['airplane', 'airplanes'],
-                ['seaplane', 'seaplanes'],
-                ['amphibious aircraft', 'amphibious aircraft'],
-                ['helicopter', 'helicopters'],
-                ['gyrocopter', 'gyrocopters'],
-                ['tiltwing', 'tiltwings'],
-                ['ground vehicle', 'ground vehicles'],
-                ['tower', 'towers']
-            ]
-        }
+        aircraft_nouns = STATIC_STRINGS['aircraft_nouns']
         if number == 1:
             return aircraft_nouns[self.lang][craft_type][0]
         else:
@@ -175,38 +146,7 @@ class ResponseGenerator:
         else:
             return ', '.join(output_strings)
             
-    def generate_static(self):
-        self.static = {}
-        if self.lang == 'de-de':
-            self.static['goodbye_title'] = 'ATC - Tschüss'
-            self.static['goodbye_response'] = 'Auf Wiedersehen von Air Traffic Control!'
-            self.static['hello_title'] = 'ATC - Grüße'
-            self.static['hello_response'] = 'Ait Traffic Control. Du kannst mich fragen, was über einen Ort fliegt.'
-            self.static['radar_title'] = 'ATC - Radar Lookup'
-            self.static['radar_response'] = 'Du kannst eine Anfrage stellen, oder sag \"Stop\" oder \"Ende\" zu beenden.'
-            self.static['radar_reprompt_1'] = 'Du hast keineen gültigen Ort eingegeben. Bitte versuch nochmal.'
-            self.static['radar_reprompt_2'] = 'Ich habe den Ort nicht erkannt. Versuch nochmal. Zum Beispiel: Was fliegt über Berlin?'
-            self.static['craft_type_error'] = 'Ich haben den Flugzeugtyp nicht erkannt. Versuch nochmal.'
-        if self.lang == 'en-uk':
-            self.static['goodbye_title'] = 'ATC - Goodbye'
-            self.static['goodbye_response'] = 'Happy travels from Air Traffic Control!'
-            self.static['hello_title'] = 'ATC - Welcome'
-            self.static['hello_response'] = 'Air Traffic Control. You can ask me what is flying over any location.'
-            self.static['radar_title'] = 'ATC - Radar Search'
-            self.static['radar_response'] = 'You can make a request, or say \"Quit\" or \"Cancel\" to exit.'
-            self.static['radar_reprompt_1'] = 'You did not give a valid location. Please try again.'
-            self.static['radar_reprompt_2'] = 'I did not recognize a location. Try something like: What is flying over London.'
-            self.static['craft_type_error'] = 'I did not recognize the type of aircraft you were asking about, please try again.'
-        if self.lang == 'en-us':
-            self.static['goodbye_title'] = 'ATC - Goodbye'
-            self.static['goodbye_response'] = 'Happy travels from Air Traffic Control!'
-            self.static['hello_title'] = 'ATC - Welcome'
-            self.static['hello_response'] = 'Air Traffic Control. You can ask me what is flying over any location.'
-            self.static['radar_title'] = 'ATC - Radar Search'
-            self.static['radar_response'] = 'You can make a request, or say \"Quit\" or \"Cancel\" to exit.'
-            self.static['radar_reprompt_1'] = 'You did not give a valid location. Please try again.'
-            self.static['radar_reprompt_2'] = 'I did not recognize a location. Try something like: What is flying over New York.'
-            self.static['craft_type_error'] = 'I did not recognize the type of aircraft you were asking about, please try again.'
+
 
 """
 ============

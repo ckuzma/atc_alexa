@@ -1,0 +1,70 @@
+{
+    "de-DE": {
+        "goodbye_title": "ATC - Tschüss",
+        "goodbye_response": "Auf Wiedersehen von Air Traffic Control!",
+        "hello_title": "ATC - Grüße",
+        "hello_response": "Ait Traffic Control. Du kannst mich fragen, was über einen Ort fliegt.",
+        "radar_title": "ATC - Radar Lookup",
+        "radar_response": "Du kannst eine Anfrage stellen, oder sag \"Stop\" oder \"Ende\" zu beenden.",
+        "radar_reprompt_1": "Du hast keineen gültigen Ort eingegeben. Bitte versuch nochmal.",
+        "radar_reprompt_2": "Ich habe den Ort nicht erkannt. Versuch nochmal. Zum Beispiel: Was fliegt über Berlin?",
+        "craft_type_error": "Ich haben den Flugzeugtyp nicht erkannt. Versuch nochmal."
+    },
+    "en-UK": {
+        "goodbye_title": "ATC - Goodbye",
+        "goodbye_response": "Happy travels from Air Traffic Control!",
+        "hello_title": "ATC - Welcome",
+        "hello_response": "Air Traffic Control. You can ask me what is flying over any location.",
+        "radar_title": "ATC - Radar Search",
+        "radar_response": "You can make a request, or say \"Quit\" or \"Cancel\" to exit.",
+        "radar_reprompt_1": "You did not give a valid location. Please try again.",
+        "radar_reprompt_2": "I did not recognize a location. Try something like: What is flying over London.",
+        "craft_type_error": "I did not recognize the type of aircraft you were asking about, please try again."
+    },
+    "en-US": {
+        "goodbye_title": "ATC - Goodbye",
+        "goodbye_response": "Happy travels from Air Traffic Control!",
+        "hello_title": "ATC - Welcome",
+        "hello_response": "Air Traffic Control. You can ask me what is flying over any location.",
+        "radar_title": "ATC - Radar Search",
+        "radar_response": "You can make a request, or say \"Quit\" or \"Cancel\" to exit.",
+        "radar_reprompt_1": "You did not give a valid location. Please try again.",
+        "radar_reprompt_2": "I did not recognize a location. Try something like: What is flying over New York.",
+        "craft_type_error": "I did not recognize the type of aircraft you were asking about, please try again."
+    },
+    "aircraft_nouns": {
+        "de-DE" : [
+            ["Flugmaschine", "Flugmaschinen"],
+            ["Flugzeug", "Flugzeuge"],
+            ["Wasserflugzeug", "Wasserflugzeuge"],
+            ["Amphibienflugzeug", "Amphibienflugzeuge"],
+            ["Hubschrauber", "Hubschrauber"],
+            ["Tragschrauber", "Tragschrauber"],
+            ["VTOL-Flugzeug", "VTOL-Flugzeuge"],
+            ["Landfahrzeug", "Landfahrzeuge"],
+            ["Turm", "Türme"]
+        ],
+        "en-UK" : [
+            ["aircraft", "aircraft"],
+            ["aeroplane", "aeroplanes"],
+            ["seaplane", "seaplanes"],
+            ["amphibious aircraft", "amphibious aircraft"],
+            ["helicopter", "helicopters"],
+            ["gyrocopter", "gyrocopters"],
+            ["tiltwing", "tiltwings"],
+            ["ground vehicle", "ground vehicles"],
+            ["tower", "towers"]
+        ],
+        "en-US" : [
+            ["aircraft", "aircraft"],
+            ["airplane", "airplanes"],
+            ["seaplane", "seaplanes"],
+            ["amphibious aircraft", "amphibious aircraft"],
+            ["helicopter", "helicopters"],
+            ["gyrocopter", "gyrocopters"],
+            ["tiltwing", "tiltwings"],
+            ["ground vehicle", "ground vehicles"],
+            ["tower", "towers"]
+        ]
+    }
+}
