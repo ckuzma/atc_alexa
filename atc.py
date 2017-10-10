@@ -7,6 +7,10 @@ from util.object_parsing import ObjectParsing
 from util.radar_interpreter import RadarInterpreter
 from util.response_generator import ResponseGenerator
 
+## Import the credentials
+from config import Credentials
+credentials = Credentials()
+
 DISTANCE_RADIUS = 20, # Distance radius (2-dimensional) max
 MAX_ALTITUDE = 80000 # Maximum Altitude
 
@@ -58,11 +62,17 @@ class AirTrafficControl:
         """
         aircraft = self._get_aircraft(user_location_string)
         response = self.generator.generate_list([[0, len(aircraft)]])
-        if self.lang == 'de-de':
+        ## German
+        if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
-        if self.lang == 'en-uk':
+
+        ## UK English
+        if self.lang == 'en-UK' and len(aircraft) > 1:
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
-        if self.lang == 'en-us':
+        
+
+        ## US English
+        if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
     def aircraft_count_specific(self, user_location_string):
@@ -108,11 +118,11 @@ class AirTrafficControl:
         if len(results_list) == 0:
             results_list.append([0, 0])
         response = self.generator.generate_list(results_list)
-        if self.lang == 'de-de':
+        if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
-        if self.lang == 'en-uk':
+        if self.lang == 'en-UK':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
-        if self.lang == 'en-us':
+        if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
     def aircraft_of_type(self, user_location_string, desired_type):
@@ -141,11 +151,11 @@ class AirTrafficControl:
                 response = self.generator.generate_list([[desired_type, type_count]])
         else:
             response = self.generator.generate_list([[0, 0]])
-        if self.lang == 'de-de':
+        if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
-        if self.lang == 'en-uk':
+        if self.lang == 'en-UK':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
-        if self.lang == 'en-us':
+        if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
     def highest_aircraft(self, user_location_string):
@@ -162,12 +172,12 @@ class AirTrafficControl:
             response = self.generator.generate_aircraft_details(highest_craft)
         else:
             response = self.generator.generate_list([[0, 0]])
-        if self.lang == 'de-de':
+        if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
-        if self.lang == 'en-uk':
-            return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
-        if self.lang == 'en-us':
-            return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'en-UK':
+            return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'en-US':
+            return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
     def lowest_aircraft(self, user_location_string):
         """
@@ -183,38 +193,38 @@ class AirTrafficControl:
             response = self.generator.generate_aircraft_details(lowest_craft)
         else:
             response = self.generator.generate_list([[0, 0]])
-        if self.lang == 'de-de':
+        if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
-        if self.lang == 'en-uk':
-            return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
-        if self.lang == 'en-us':
-            return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'en-UK':
+            return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'en-US':
+            return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
 
 """
 Tests:
 """
 # if __name__ == '__main__':
-    # print('\n--- DE (DE) Tests --')
-    # atc = AirTrafficControl('de-de')
-    # print(atc.aircraft_count('Los Angeles'))
-    # print(atc.aircraft_count_specific('Los Angeles'))
-    # print(atc.aircraft_of_type('Los Angeles', 1))
-    # print(atc.highest_aircraft('Los Angeles'))
-    # print(atc.lowest_aircraft('Los Angeles'))
+#     print('\n--- DE (DE) Tests --')
+#     atc = AirTrafficControl('de-DE')
+#     print(atc.aircraft_count('Los Angeles'))
+#     print(atc.aircraft_count_specific('Los Angeles'))
+#     print(atc.aircraft_of_type('Los Angeles', 1))
+#     print(atc.highest_aircraft('Los Angeles'))
+#     print(atc.lowest_aircraft('Los Angeles'))
     
-    # print('\n--- EN (UK) Tests --')
-    # atc = AirTrafficControl('en-uk')
-    # print(atc.aircraft_count('Los Angeles'))
-    # print(atc.aircraft_count_specific('Los Angeles'))
-    # print(atc.aircraft_of_type('Los Angeles', 1))
-    # print(atc.highest_aircraft('Los Angeles'))
-    # print(atc.lowest_aircraft('Los Angeles'))
+#     print('\n--- EN (UK) Tests --')
+#     atc = AirTrafficControl('en-UK')
+#     print(atc.aircraft_count('Los Angeles'))
+#     print(atc.aircraft_count_specific('Los Angeles'))
+#     print(atc.aircraft_of_type('Los Angeles', 1))
+#     print(atc.highest_aircraft('Los Angeles'))
+#     print(atc.lowest_aircraft('Los Angeles'))
 
-    # print('\n--- EN (US) Tests --')
-    # atc = AirTrafficControl('en-us')
-    # print(atc.aircraft_count('Los Angeles'))
-    # print(atc.aircraft_count_specific('Los Angeles'))
-    # print(atc.aircraft_of_type('Los Angeles', 1))
-    # print(atc.highest_aircraft('Los Angeles'))
-    # print(atc.lowest_aircraft('Los Angeles'))
+#     print('\n--- EN (US) Tests --')
+#     atc = AirTrafficControl('en-US')
+#     print(atc.aircraft_count('Los Angeles'))
+#     print(atc.aircraft_count_specific('Los Angeles'))
+#     print(atc.aircraft_of_type('Los Angeles', 1))
+#     print(atc.highest_aircraft('Los Angeles'))
+#     print(atc.lowest_aircraft('Los Angeles'))
