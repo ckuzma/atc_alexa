@@ -8,7 +8,7 @@
         "radar_response": "Du kannst eine Anfrage stellen, oder sag \"Stop\" oder \"Ende\" zu beenden.",
         "radar_reprompt_1": "Du hast keineen gültigen Ort eingegeben. Bitte versuch nochmal.",
         "radar_reprompt_2": "Ich habe den Ort nicht erkannt. Versuch nochmal. Zum Beispiel: Was fliegt über Berlin?",
-        "craft_type_error": "Ich haben den Flugzeugtyp nicht erkannt. Versuch nochmal."
+        "craft_type_error": "Ich habe den Flugzeugtyp nicht erkannt. Versuch nochmal."
     },
     "en-UK": {
         "goodbye_title": "ATC - Goodbye",
