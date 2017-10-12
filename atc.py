@@ -67,7 +67,7 @@ class AirTrafficControl:
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
 
         ## UK English
-        if self.lang == 'en-UK' and len(aircraft) > 1:
+        if self.lang == 'en-GB' and len(aircraft) > 1:
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
         
 
@@ -120,7 +120,7 @@ class AirTrafficControl:
         response = self.generator.generate_list(results_list)
         if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
-        if self.lang == 'en-UK':
+        if self.lang == 'en-GB':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
@@ -153,7 +153,7 @@ class AirTrafficControl:
             response = self.generator.generate_list([[0, 0]])
         if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
-        if self.lang == 'en-UK':
+        if self.lang == 'en-GB':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
@@ -174,7 +174,7 @@ class AirTrafficControl:
             response = self.generator.generate_list([[0, 0]])
         if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
-        if self.lang == 'en-UK':
+        if self.lang == 'en-GB':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
@@ -195,7 +195,7 @@ class AirTrafficControl:
             response = self.generator.generate_list([[0, 0]])
         if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
-        if self.lang == 'en-UK':
+        if self.lang == 'en-GB':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
@@ -214,7 +214,7 @@ Tests:
 #     print(atc.lowest_aircraft('Los Angeles'))
     
 #     print('\n--- EN (UK) Tests --')
-#     atc = AirTrafficControl('en-UK')
+#     atc = AirTrafficControl('en-GB')
 #     print(atc.aircraft_count('Los Angeles'))
 #     print(atc.aircraft_count_specific('Los Angeles'))
 #     print(atc.aircraft_of_type('Los Angeles', 1))

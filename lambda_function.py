@@ -68,14 +68,6 @@ def get_radar(intent, session, lang):
         should_end_session = False
     return build_response(session_attributes, build_speechlet_response(card_title, speech_output, reprompt_text, should_end_session))
 
-def interpret_language(locale):
-    if locale == 'de-DE':
-        return 'de-de'
-    if locale == 'en-UK':
-        return 'en-uk'
-    if local == 'en-US':
-        return 'en-us'
-
 def get_intent_speech(intent, location, lang):
     ## Instantiate our class w/language
     atc_control = AirTrafficControl(lang)
@@ -145,7 +137,7 @@ def lambda_handler(event, context):
     print("event.session.application.applicationId=" + event['session']['application']['applicationId'])
     if (event['session']['application']['applicationId'] != credentials.alexa_id):
         raise ValueError("Invalid Application ID")
-
+    
     ## Start the actual event handling
     if event['session']['new']:
         on_session_started({'requestId': event['request']['requestId']},event['session'])
@@ -164,71 +156,71 @@ def lambda_handler(event, context):
 """
 
 # if __name__ == '__main__':
-#     ## Create a dummy event
-#     dummy_event ={
-#         "session": {
-#             "new": True,
-#             "sessionId": "SessionId.xxxx",
-#             "application": {
-#             "applicationId": ""
-#             },
-#             "attributes": {},
-#             "user": {
-#             "userId": "amzn1.ask.account.xxxx"
-#             }
-#         },
-#         "request": {
-#             "type": "IntentRequest",
-#             "requestId": "EdwRequestId.xxxx",
-#             "intent": {
-#                 "name": "",
-#                 "slots": {
-#                     "CraftType": {
-#                         "name": "CraftType",
-#                         "value": "helicopters"
-#                     },
-#                     "Location": {
-#                         "name": "Location",
-#                         "value": "Portland"
-#                     }
-#                 }
-#             },
-#             "locale": "",
-#             "timestamp": "2017-10-10T01:23:50Z"
-#         },
-#         "context": {
-#             "AudioPlayer": {
-#             "playerActivity": "IDLE"
-#             },
-#             "System": {
-#             "application": {
-#                 "applicationId": "amzn1.ask.skill.xxxx"
-#             },
-#             "user": {
-#                 "userId": "amzn1.ask.account.xxxx"
-#             },
-#             "device": {
-#                 "supportedInterfaces": {}
-#             }
-#             }
-#         },
-#         "version": "1.0"
-#     }
-#     dummy_event['session']['application']['applicationId'] = credentials.alexa_id
+    # ## Create a dummy event
+    # dummy_event ={
+    #     "session": {
+    #         "new": True,
+    #         "sessionId": "SessionId.xxxx",
+    #         "application": {
+    #         "applicationId": ""
+    #         },
+    #         "attributes": {},
+    #         "user": {
+    #         "userId": "amzn1.ask.account.xxxx"
+    #         }
+    #     },
+    #     "request": {
+    #         "type": "IntentRequest",
+    #         "requestId": "EdwRequestId.xxxx",
+    #         "intent": {
+    #             "name": "",
+    #             "slots": {
+    #                 "CraftType": {
+    #                     "name": "CraftType",
+    #                     "value": "helicopters"
+    #                 },
+    #                 "Location": {
+    #                     "name": "Location",
+    #                     "value": "Portland"
+    #                 }
+    #             }
+    #         },
+    #         "locale": "",
+    #         "timestamp": "2017-10-10T01:23:50Z"
+    #     },
+    #     "context": {
+    #         "AudioPlayer": {
+    #         "playerActivity": "IDLE"
+    #         },
+    #         "System": {
+    #         "application": {
+    #             "applicationId": "amzn1.ask.skill.xxxx"
+    #         },
+    #         "user": {
+    #             "userId": "amzn1.ask.account.xxxx"
+    #         },
+    #         "device": {
+    #             "supportedInterfaces": {}
+    #         }
+    #         }
+    #     },
+    #     "version": "1.0"
+    # }
+    # dummy_event['session']['application']['applicationId'] = credentials.alexa_id
 
-#     ## Set the params
-#     dummy_event['request']['locale'] = 'en-UK'
-#     dummy_event['request']['intent']['slots']['CraftType']['value'] = 'helicopters' # <-- Not used by every intent
-#     dummy_event['request']['intent']['slots']['Location']['value'] = 'New York'
+    # ## Set the params
+    # dummy_event['request']['locale'] = 'en-GB'
+    # dummy_event['request']['intent']['slots']['CraftType']['value'] = 'helicopters' # <-- Not used by every intent
+    # dummy_event['request']['intent']['slots']['Location']['value'] = 'New York'
 
-#     ## Set the intent
-#     # dummy_event['request']['intent']['name'] = 'AircraftCountIntent'
-#     # dummy_event['request']['intent']['name'] = 'AircraftCountSpecificIntent'
-#     # dummy_event['request']['intent']['name'] = 'AircraftOfTypeIntent'
-#     # dummy_event['request']['intent']['name'] = 'HighestAircraftIntent'
-#     dummy_event['request']['intent']['name'] = 'LowestAircraftIntent'
+    # ## Set the intent
+    # # dummy_event['request']['intent']['name'] = 'AircraftCountIntent'
+    # # dummy_event['request']['intent']['name'] = 'AircraftCountSpecificIntent'
+    # # dummy_event['request']['intent']['name'] = 'AircraftOfTypeIntent'
+    # # dummy_event['request']['intent']['name'] = 'HighestAircraftIntent'
+    # dummy_event['request']['intent']['name'] = 'LowestAircraftIntent'
 
-    ## Execute the Lambda handler
+    # # Execute the Lambda handler
     # response = lambda_handler(dummy_event, None) # <-- We don't need context where we're going
     # print('\n--- [ DEBUG RESULTS: ] ----')
     # print(response['response']['outputSpeech']['text'])

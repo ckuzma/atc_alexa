@@ -10,7 +10,7 @@
         "radar_reprompt_2": "Ich habe den Ort nicht erkannt. Versuch nochmal. Zum Beispiel: Was fliegt über Berlin?",
         "craft_type_error": "Ich habe den Flugzeugtyp nicht erkannt. Versuch nochmal."
     },
-    "en-UK": {
+    "en-GB": {
         "goodbye_title": "ATC - Goodbye",
         "goodbye_response": "Happy travels from Air Traffic Control!",
         "hello_title": "ATC - Welcome",
@@ -44,7 +44,7 @@
             ["Landfahrzeug", "Landfahrzeuge"],
             ["Turm", "Türme"]
         ],
-        "en-UK" : [
+        "en-GB" : [
             ["aircraft", "aircraft"],
             ["aeroplane", "aeroplanes"],
             ["seaplane", "seaplanes"],
