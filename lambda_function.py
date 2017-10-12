@@ -229,8 +229,8 @@ def lambda_handler(event, context):
 #     dummy_event['request']['intent']['name'] = 'LowestAircraftIntent'
 
     ## Execute the Lambda handler
-    response = lambda_handler(dummy_event, None) # <-- We don't need context where we're going
-    print('\n--- [ DEBUG RESULTS: ] ----')
-    print(response['response']['outputSpeech']['text'])
-    print('---------------------------\n')
+    # response = lambda_handler(dummy_event, None) # <-- We don't need context where we're going
+    # print('\n--- [ DEBUG RESULTS: ] ----')
+    # print(response['response']['outputSpeech']['text'])
+    # print('---------------------------\n')
     
