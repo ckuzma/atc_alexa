@@ -58,7 +58,7 @@ def get_radar(intent, session, lang):
     card_title = STATIC_STRINGS[lang]['radar_title']
     session_attributes = {}
     if 'Location' in intent['slots'] and 'value' in intent['slots']['Location']:
-        user_location = intent['slots']['Location']['value']
+        user_location = intent['slots']['Location']['value'].title() # <-- We "titalize" it to capitalize first characters of every word
         speech_output = get_intent_speech(intent, user_location, lang)
         reprompt_text = STATIC_STRINGS[lang]['radar_response']
         should_end_session = True
