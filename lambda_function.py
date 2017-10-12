@@ -40,17 +40,17 @@ def build_response(session_attributes, speechlet_response):
         'response': speechlet_response
     }
 
-def get_welcome_response():
+def get_welcome_response(lang):
     session_attributes = {}
-    card_title = generator.static['hello_title']
-    speech_output = generator.static['hello_response']
-    reprompt_text = generator.static['hello_response']
+    card_title = STATIC_STRINGS[lang]['hello_title']
+    speech_output = STATIC_STRINGS[lang]['hello_response']
+    reprompt_text = STATIC_STRINGS[lang]['hello_response']
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(card_title, speech_output, reprompt_text, should_end_session))
 
-def handle_session_end_request():
-    card_title = generator.static['goodbye_title']
-    speech_output = generator.static['goodbye_response']
+def handle_session_end_request(lang):
+    card_title = STATIC_STRINGS[lang]['goodbye_title']
+    speech_output = STATIC_STRINGS[lang]['goodbye_response']
     should_end_session = True
     return build_response({}, build_speechlet_response(card_title, speech_output, None, should_end_session))
 
@@ -103,7 +103,7 @@ def get_intent_speech(intent, location, lang):
             pass
         if craft_type is not None:
             return atc_control.aircraft_of_type(location, craft_type)
-        return generator.static['craft_type_error']
+        return STATIC_STRINGS[lang]['craft_type_error']
     if intent['name'] == 'HighestAircraftIntent':
         return atc_control.highest_aircraft(location)
     if intent['name'] == 'LowestAircraftIntent':
@@ -114,7 +114,7 @@ def on_session_started(session_started_request, session):
 
 def on_launch(launch_request, session):
     print("on_launch requestId=" + launch_request['requestId'] + ", sessionId=" + session['sessionId'])
-    return get_welcome_response()
+    return get_welcome_response(launch_request['locale'])
 
 def on_intent(intent_request, session):
     print("on_intent requestId=" + intent_request['requestId'] +", sessionId=" + session['sessionId'])
@@ -131,9 +131,9 @@ def on_intent(intent_request, session):
     if intent_name in custom_intents:
         return get_radar(intent, session, intent_lang)
     elif intent_name == "AMAZON.HelpIntent":
-        return get_welcome_response()
+        return get_welcome_response(intent_lang)
     elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":
-        return handle_session_end_request()
+        return handle_session_end_request(intent_lang)
     else:
         raise ValueError("Invalid intent")
 
@@ -145,10 +145,6 @@ def lambda_handler(event, context):
     print("event.session.application.applicationId=" + event['session']['application']['applicationId'])
     if (event['session']['application']['applicationId'] != credentials.alexa_id):
         raise ValueError("Invalid Application ID")
-
-    # ## Set some langauge stuff
-    # lang = event['request']['locale']
-    # generator = ResponseGenerator(lang)
 
     ## Start the actual event handling
     if event['session']['new']:
@@ -232,9 +228,9 @@ def lambda_handler(event, context):
 #     # dummy_event['request']['intent']['name'] = 'HighestAircraftIntent'
 #     dummy_event['request']['intent']['name'] = 'LowestAircraftIntent'
 
-#     ## Execute the Lambda handler
-#     response = lambda_handler(dummy_event, None) # <-- We don't need context where we're going
-#     print('\n--- [ DEBUG RESULTS: ] ----')
-#     print(response['response']['outputSpeech']['text'])
-#     print('---------------------------\n')
+    ## Execute the Lambda handler
+    response = lambda_handler(dummy_event, None) # <-- We don't need context where we're going
+    print('\n--- [ DEBUG RESULTS: ] ----')
+    print(response['response']['outputSpeech']['text'])
+    print('---------------------------\n')
     
