@@ -3,7 +3,7 @@
 --  Templates --
 ================
 
-EN-US
+en-US
 0.) There are {no} aircraft over {Portland} on our radar right now.
 1.) There is {one} aircraft over {Portland} on our radar.
 2.) There are {three} aircraft over {Portland} on our radar.
@@ -13,7 +13,7 @@ EN-US
 6.) There is {one} {airplane} and {two} {helicopters} over {Portland} on our radar.
 7.) There are {two} {airplanes}, {one} {seaplane}, and {one} {helicopter} over {Portland} on our radar.
 
-EN-UK
+en-GB
 0.) There are {no} aircraft over {Portland} on our radar right now.
 1.) There is {one} aircraft over {Portland} on our radar.
 2.) There are {three} aircraft over {Portland} on our radar.
@@ -23,7 +23,7 @@ EN-UK
 6.) There is {one} {aeroplane} and {two} {helicopters} over {Portland} on our radar.
 7.) There are {two} {aeroplanes}, {one} {seaplane}, and {one} {helicopter} over {Portland} on our radar.
 
-DE-DE
+de-DE
 0.) Es gibt momentan {keine} Flugmaschine über {Portland} auf unserem Radar.
 1.) Es gibt {eine} Flugmaschine über {Portland} auf unserem Radar.
 2.) Es gibt {drei} Flugmaschinen über {Portland} auf unserem Radar.
@@ -46,30 +46,30 @@ class ResponseGenerator:
     
     def generate_aircraft_details(self, craft):
         return_string = []
-        if self.lang == 'de-de':
+        if self.lang == 'de-DE':
             return_string.append('ein')
-        if self.lang == 'en-uk':
+        if self.lang == 'en-GB':
             return_string.append('a')
-        if self.lang == 'en-us':
+        if self.lang == 'en-US':
             return_string.append('a')
         if 'operator' in craft and craft['operator'] != None:
-            return_string.append(craft['operator'])
+            return_string.append(craft['operator'].title())
         if 'manufacturer' in craft and craft['manufacturer'] != None:
-            return_string.append(craft['manufacturer'])
+            return_string.append(craft['manufacturer'].title())
         if 'model' in craft and craft['model'] != None:
-            return_string.append(craft['model'])
-        if self.lang == 'de-de':
+            return_string.append(craft['model'].title())
+        if self.lang == 'de-DE':
             return_string.append('mit einer Flughöhe von')
-        if self.lang == 'en-uk':
+        if self.lang == 'en-GB':
             return_string.append('at an altitude of')
-        if self.lang == 'en-us':
+        if self.lang == 'en-US':
             return_string.append('at an altitude of')
         return_string.append(str(craft['altitude']))
-        if self.lang == 'de-de':
+        if self.lang == 'de-DE':
             return_string.append('Fuß')
-        if self.lang == 'en-uk':
+        if self.lang == 'en-GB':
             return_string.append('feet')
-        if self.lang == 'en-us':
+        if self.lang == 'en-US':
             return_string.append('feet')
         return ' '.join(return_string)
 
@@ -95,7 +95,7 @@ class ResponseGenerator:
                 OUTPUT: 'keine Flugmaschinen'
         """
         ## German rules
-        if self.lang == 'de-de':
+        if self.lang == 'de-DE':
             if aircraft_count == 0:
                 return 'keine ' + self.generate_aircraft(aircraft_type, aircraft_count)
             if aircraft_count == 1:
@@ -136,7 +136,7 @@ class ResponseGenerator:
             return output_strings[0]
         if len(output_strings) > 1:
             ## German
-            if self.lang == 'de-de':
+            if self.lang == 'de-DE':
                 output_strings[len(output_strings) - 1] = 'und ' + output_strings[len(output_strings) - 1]
             ## English
             else:
@@ -162,14 +162,14 @@ class ResponseGenerator:
 #     ]
 
 #     print('-- US ENGLISH TEST --')
-#     generator = ResponseGenerator('en-us')
+#     generator = ResponseGenerator('en-US')
 #     print(generator.generate_list(airplanes))
 
 #     print('-- UK ENGLISH TEST --')
-#     generator = ResponseGenerator('en-uk')
+#     generator = ResponseGenerator('en-GB')
 #     print(generator.generate_list(airplanes))
 
 #     print('-- DE GERMAN TEST --')
-#     generator = ResponseGenerator('de-de')
+#     generator = ResponseGenerator('de-DE')
 #     print(generator.generate_list(airplanes))
 
