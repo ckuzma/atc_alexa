@@ -79,20 +79,11 @@ def get_intent_speech(intent, location, lang):
         return atc_control.aircraft_count_specific(location)
     if intent['name'] == 'AircraftOfTypeIntent':
         craft_type = None
-        craft_dict = {
-            'airplanes': 1,
-            'seaplanes': 2,
-            'amphibians': 3,
-            'helicopters': 4,
-            'gyrocopters': 5,
-            'tiltwings': 6,
-            'ground vehicles': 7,
-            'towers': 8
-        }
-        try:
-            craft_type = craft_dict[intent['slots']['CraftType']['value']]
-        except:
-            pass
+        x = 0
+        while x < len(STATIC_STRINGS['aircraft_nouns'][lang]):
+            if intent['slots']['CraftType']['value'].lower() == STATIC_STRINGS['aircraft_nouns'][lang][x][0].lower() or intent['slots']['CraftType']['value'].lower() == STATIC_STRINGS['aircraft_nouns'][lang][x][1].lower():
+                craft_type = x
+            x+=1
         if craft_type is not None:
             return atc_control.aircraft_of_type(location, craft_type)
         return STATIC_STRINGS[lang]['craft_type_error']
