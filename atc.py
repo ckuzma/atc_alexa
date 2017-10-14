@@ -38,22 +38,22 @@ class AirTrafficControl:
     def _get_aircraft(self, user_location_string, debug=False):
         """
         Returns a list of all aircraft found for that location, or
-        a null value if none are found or if an IO error.
+        an empty list if none are found or if an IO error.
         """
         location = self._get_location(user_location_string)
         if location == None:
             print('DEBUG: Unable to get user location (' + user_location_string + ')')
-            return None
+            return []
         radar_results = self.virtual_radar.get_radar(location['lat'], location['lon'], DISTANCE_RADIUS, MAX_ALTITUDE)
         if debug is True:
             print(json.dumps(radar_results, indent=2))
         if radar_results == None:
             print('DEBUG: Unable to get radar scan from API (' + user_location_string + ')')
-            return None
+            return []
         aircraft = self.radar_interpreter.extract_aircraft(radar_results['acList'])
         if len(aircraft) == 0:
             print('DEBUG: No aircraft overhead (' + location['name'] + ')')
-            return None
+            return []
         return aircraft
 
     def aircraft_count(self, user_location_string):
