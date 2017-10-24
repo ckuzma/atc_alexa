@@ -69,7 +69,10 @@ class AirTrafficControl:
         ## UK English
         if self.lang == 'en-GB' and len(aircraft) > 1:
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
-        
+
+        ## IN English
+        if self.lang == 'en-IN' and len(aircraft) > 1:
+            return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
         ## US English
         if self.lang == 'en-US':
@@ -122,6 +125,8 @@ class AirTrafficControl:
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
         if self.lang == 'en-GB':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'en-IN':
+            return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
@@ -155,6 +160,8 @@ class AirTrafficControl:
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
         if self.lang == 'en-GB':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'en-IN':
+            return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
@@ -175,6 +182,8 @@ class AirTrafficControl:
         if self.lang == 'de-DE':
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
         if self.lang == 'en-GB':
+            return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'en-IN':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
@@ -197,6 +206,8 @@ class AirTrafficControl:
             return 'Momentan gibt es auf unserem Radar ' + response + ' über ' + user_location_string + '.'
         if self.lang == 'en-GB':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'en-IN':
+            return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
@@ -204,7 +215,7 @@ class AirTrafficControl:
 """
 Tests:
 """
-# if __name__ == '__main__':
+if __name__ == '__main__':
 #     print('\n--- DE (DE) Tests --')
 #     atc = AirTrafficControl('de-DE')
 #     print(atc.aircraft_count('Los Angeles'))
@@ -221,10 +232,18 @@ Tests:
 #     print(atc.highest_aircraft('Los Angeles'))
 #     print(atc.lowest_aircraft('Los Angeles'))
 
-#     print('\n--- EN (US) Tests --')
-#     atc = AirTrafficControl('en-US')
-#     print(atc.aircraft_count('Los Angeles'))
-#     print(atc.aircraft_count_specific('Los Angeles'))
-#     print(atc.aircraft_of_type('Los Angeles', 1))
-#     print(atc.highest_aircraft('Los Angeles'))
-#     print(atc.lowest_aircraft('Los Angeles'))
+    print('\n--- EN (IN) Tests --')
+    atc = AirTrafficControl('en-IN')
+    print(atc.aircraft_count('Los Angeles'))
+    print(atc.aircraft_count_specific('Los Angeles'))
+    print(atc.aircraft_of_type('Los Angeles', 1))
+    print(atc.highest_aircraft('Los Angeles'))
+    print(atc.lowest_aircraft('Los Angeles'))
+
+    # print('\n--- EN (US) Tests --')
+    # atc = AirTrafficControl('en-US')
+    # print(atc.aircraft_count('Los Angeles'))
+    # print(atc.aircraft_count_specific('Los Angeles'))
+    # print(atc.aircraft_of_type('Los Angeles', 1))
+    # print(atc.highest_aircraft('Los Angeles'))
+    # print(atc.lowest_aircraft('Los Angeles'))

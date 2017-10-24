@@ -21,6 +21,17 @@
         "radar_reprompt_2": "I did not recognize a location. Try something like: What is flying over London.",
         "craft_type_error": "I did not recognize the type of aircraft you were asking about, please try again."
     },
+    "en-IN": {
+        "goodbye_title": "ATC - Goodbye",
+        "goodbye_response": "Happy travels from Air Traffic Control!",
+        "hello_title": "ATC - Welcome",
+        "hello_response": "Air Traffic Control. You can ask me what is flying over any location.",
+        "radar_title": "ATC - Radar Search",
+        "radar_response": "You can make a request, or say \"Quit\" or \"Cancel\" to exit.",
+        "radar_reprompt_1": "You did not give a valid location. Please try again.",
+        "radar_reprompt_2": "I did not recognize a location. Try something like: What is flying over London.",
+        "craft_type_error": "I did not recognize the type of aircraft you were asking about, please try again."
+    },
     "en-US": {
         "goodbye_title": "ATC - Goodbye",
         "goodbye_response": "Happy travels from Air Traffic Control!",
@@ -45,6 +56,17 @@
             ["Turm", "Türme"]
         ],
         "en-GB" : [
+            ["aircraft", "aircraft"],
+            ["aeroplane", "aeroplanes"],
+            ["seaplane", "seaplanes"],
+            ["amphibious aircraft", "amphibious aircraft"],
+            ["helicopter", "helicopters"],
+            ["gyrocopter", "gyrocopters"],
+            ["tiltwing", "tiltwings"],
+            ["ground vehicle", "ground vehicles"],
+            ["tower", "towers"]
+        ],
+        "en-IN" : [
             ["aircraft", "aircraft"],
             ["aeroplane", "aeroplanes"],
             ["seaplane", "seaplanes"],

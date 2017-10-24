@@ -50,6 +50,8 @@ class ResponseGenerator:
             return_string.append('ein')
         if self.lang == 'en-GB':
             return_string.append('a')
+        if self.lang == 'en-IN':
+            return_string.append('a')
         if self.lang == 'en-US':
             return_string.append('a')
         if 'operator' in craft and craft['operator'] != None:
@@ -62,12 +64,16 @@ class ResponseGenerator:
             return_string.append('mit einer Flughöhe von')
         if self.lang == 'en-GB':
             return_string.append('at an altitude of')
+        if self.lang == 'en-IN':
+            return_string.append('at an altitude of')
         if self.lang == 'en-US':
             return_string.append('at an altitude of')
         return_string.append(str(craft['altitude']))
         if self.lang == 'de-DE':
             return_string.append('Fuß')
         if self.lang == 'en-GB':
+            return_string.append('feet')
+        if self.lang == 'en-IN':
             return_string.append('feet')
         if self.lang == 'en-US':
             return_string.append('feet')
@@ -167,6 +173,10 @@ class ResponseGenerator:
 
 #     print('-- UK ENGLISH TEST --')
 #     generator = ResponseGenerator('en-GB')
+#     print(generator.generate_list(airplanes))
+
+#     print('-- IN ENGLISH TEST --')
+#     generator = ResponseGenerator('en-IN')
 #     print(generator.generate_list(airplanes))
 
 #     print('-- DE GERMAN TEST --')
