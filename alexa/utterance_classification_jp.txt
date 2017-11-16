@@ -1,0 +1,34 @@
+AircraftCountIntent {Location} の上に何かありますか
+AircraftCountIntent {Location} には何かありますか
+AircraftCountIntent {Location} の近くに航空機はありますか
+AircraftCountIntent {Location} を飛んでいるものはありますか
+AircraftCountIntent {Location} には何台の車両がありますか
+
+AircraftCountSpecificIntent {Location} にはどんな航空機がありますか
+AircraftCountSpecificIntent {Location} に飛行機がたくさんありますか
+AircraftCountSpecificIntent {Location} にはどのような車両がありますか
+AircraftCountSpecificIntent {Location} にはいろいろな機種がありますか
+AircraftCountSpecificIntent {Location} の上にはどんなものがありますか
+AircraftCountSpecificIntent どのようなものが {Location} を飛んでいるのですか
+AircraftCountSpecificIntent {Location} を飛行している物は何種類ですか
+
+AircraftOfTypeIntent {Location} にはいくつの {CraftType} がありますか
+AircraftOfTypeIntent {Location} に {CraftType} はありますか
+AircraftOfTypeIntent {Location} より {CraftType} が飛んでいますか
+AircraftOfTypeIntent {Location} を飛んでいる {CraftType} は
+
+HighestAircraftIntent {Location} 近郊で最高の飛行機は何ですか
+HighestAircraftIntent {Location} 上空で最も飛行機は何ですか
+HighestAircraftIntent {Location} を上回る最高の航空機は何ですか
+HighestAircraftIntent {Location} を上回る最高のものは何ですか
+HighestAircraftIntent {Location} を飛行する最高の飛行物体は何ですか
+HighestAircraftIntent {Location} で一番飛行機は何ですか
+HighestAircraftIntent {Location} で最も高い航空機
+
+LowestAircraftIntent {Location} を飛び回っているのは何ですか
+LowestAircraftIntent {Location} より飛行機は何ですか
+LowestAircraftIntent {Location} で何が飛んでいますか
+LowestAircraftIntent {Location} に最も近い航空機は何ですか
+LowestAircraftIntent {Location} で一番小さい飛行機は何ですか
+LowestAircraftIntent {Location} で一番低い飛行機は何ですか
+LowestAircraftIntent {Location} で最も低い航空機

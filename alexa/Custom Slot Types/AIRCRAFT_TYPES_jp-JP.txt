@@ -1,0 +1,8 @@
+飛行機
+水上機
+amphibians
+ヘリコプター
+ジャイロコプター
+tiltwings
+ground vehicles
+towers
