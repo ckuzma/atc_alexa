@@ -78,6 +78,10 @@ class AirTrafficControl:
         if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
 
+        ## Japanese
+        if self.lang == 'ja-JP':
+            return '私たちのレーダーには現在、' + user_location_string + 'には' + response + 'があります。'
+
     def aircraft_count_specific(self, user_location_string):
         """
         Note: This is kind of a messy function, but it's easier to read this way.
@@ -129,6 +133,8 @@ class AirTrafficControl:
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'ja-JP':
+            return '私たちのレーダーには現在、' + user_location_string + 'には' + response + 'があります。'
 
     def aircraft_of_type(self, user_location_string, desired_type):
         """
@@ -164,6 +170,8 @@ class AirTrafficControl:
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'There are ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'ja-JP':
+            return '私たちのレーダーには現在、' + user_location_string + 'には' + response + 'があります。'
 
     def highest_aircraft(self, user_location_string):
         """
@@ -187,6 +195,8 @@ class AirTrafficControl:
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'ja-JP':
+            return '私たちのレーダーには現在、' + user_location_string + 'には' + response + 'があります。'
 
     def lowest_aircraft(self, user_location_string):
         """
@@ -210,6 +220,8 @@ class AirTrafficControl:
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
         if self.lang == 'en-US':
             return 'We found ' + response + ' over ' + user_location_string + ' on our radar right now.'
+        if self.lang == 'ja-JP':
+            return '私たちのレーダーには現在、' + user_location_string + 'には' + response + 'があります。'
 
 
 """

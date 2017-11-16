@@ -43,6 +43,17 @@
         "radar_reprompt_2": "I did not recognize a location. Try something like: What is flying over New York.",
         "craft_type_error": "I did not recognize the type of aircraft you were asking about, please try again."
     },
+    "ja-JP": {
+        "goodbye_title": "航空交通管制 - さようなら!",
+        "goodbye_response": "航空交通管制 - 幸せの旅!",
+        "hello_title": "航空交通管制 - ようこそ!",
+        "hello_response": "航空交通管制。 頭上に何が飛んでいるのか聞いてください。",
+        "radar_title": "航空交通管制 - レーダー検索",
+        "radar_response": "リクエストをするか、\"終了します\"か\"取り消す\"を終了してください。",
+        "radar_reprompt_1": "あなたは有効な場所を教えていませんでした。 もう一度お試しください。",
+        "radar_reprompt_2": "私はその場所を認識しませんでした。 このようなことを試してみて、\"ニューヨークを飛び回っているのは何ですか？\"、ください。",
+        "craft_type_error": "私は、あなたが求めていた航空機の種類を認識していませんでした。 もう一度お試しください。"
+    },
     "aircraft_nouns": {
         "de-DE" : [
             ["Flugmaschine", "Flugmaschinen"],
@@ -84,6 +95,17 @@
             ["amphibious aircraft", "amphibious aircraft"],
             ["helicopter", "helicopters"],
             ["gyrocopter", "gyrocopters"],
+            ["tiltwing", "tiltwings"],
+            ["ground vehicle", "ground vehicles"],
+            ["tower", "towers"]
+        ],
+        "ja-JP" : [
+            ["航空機", "航空機"],
+            ["飛行機", "飛行機"],
+            ["水上機", "水上機"],
+            ["amphibious aircraft", "amphibious aircraft"],
+            ["ヘリコプター", "ヘリコプター"],
+            ["ジャイロコプター", "ジャイロコプター"],
             ["tiltwing", "tiltwings"],
             ["ground vehicle", "ground vehicles"],
             ["tower", "towers"]

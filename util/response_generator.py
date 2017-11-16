@@ -54,6 +54,8 @@ class ResponseGenerator:
             return_string.append('a')
         if self.lang == 'en-US':
             return_string.append('a')
+        if self.lang == 'ja-JP':
+            return_string.append('一')
         if 'operator' in craft and craft['operator'] != None:
             return_string.append(craft['operator'].title())
         if 'manufacturer' in craft and craft['manufacturer'] != None:
@@ -68,6 +70,8 @@ class ResponseGenerator:
             return_string.append('at an altitude of')
         if self.lang == 'en-US':
             return_string.append('at an altitude of')
+        if self.lang == 'ja-JP':
+            return_string.append('の標高は')
         return_string.append(str(craft['altitude']))
         if self.lang == 'de-DE':
             return_string.append('Fuß')
@@ -77,6 +81,8 @@ class ResponseGenerator:
             return_string.append('feet')
         if self.lang == 'en-US':
             return_string.append('feet')
+        if self.lang == 'ja-JP':
+            return_string.append('フィート')
         return ' '.join(return_string)
 
     def generate_aircraft(self, craft_type, number):
@@ -114,13 +120,19 @@ class ResponseGenerator:
                     return 'ein ' + self.generate_aircraft(aircraft_type, aircraft_count)
             else:
                 return str(aircraft_count) + ' ' + self.generate_aircraft(aircraft_type, aircraft_count)
+        ## Japanese
+        if self.lang == 'ja-JP':
+            if aircraft_count == 0:
+                return '0' + self.generate_aircraft(aircraft_type, aircraft_count)
+            else:
+                return str(aircraft_count) + ' ' + self.generate_aircraft(aircraft_type, aircraft_count)
         ## English
         else:
             if aircraft_count == 0:
                 return 'no ' + self.generate_aircraft(aircraft_type, aircraft_count)
             else:
                 return str(aircraft_count) + ' ' + self.generate_aircraft(aircraft_type, aircraft_count)
-
+        
     def generate_list(self, aircraft_list):
         """
         Accepts a list of aircraft in the following format:
@@ -144,6 +156,9 @@ class ResponseGenerator:
             ## German
             if self.lang == 'de-DE':
                 output_strings[len(output_strings) - 1] = 'und ' + output_strings[len(output_strings) - 1]
+            ## German
+            if self.lang == 'ja-JP':
+                output_strings[len(output_strings) - 1] = 'と' + output_strings[len(output_strings) - 1]
             ## English
             else:
                 output_strings[len(output_strings) - 1] = 'and ' + output_strings[len(output_strings) - 1]

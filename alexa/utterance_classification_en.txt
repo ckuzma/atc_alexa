@@ -7,7 +7,6 @@ AircraftCountIntent are there planes near {Location}
 AircraftCountIntent how many vehicles are over {Location}
 AircraftCountIntent how many objects are near {Location}
 
-LowestAircraftIntent are there any aircraft near {Location}
 AircraftCountSpecificIntent what aircraft are in {Location}
 AircraftCountSpecificIntent what aircraft are in the {Location} area
 AircraftCountSpecificIntent what types of vehicles are over {Location}
