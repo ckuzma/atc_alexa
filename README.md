@@ -3,10 +3,6 @@
 # atc_alexa
 Air Traffic Control skill for Amazon Alexa. Gives information about what is flying over any location. Submitted as contest entry to the Alexa API Mashup competition on Hackster. (https://www.hackster.io/kuzma/alexa-air-traffic-control-a22a03)
 
-## Alexa Skill Deployment Status:
-* (2016.11.17 @ 19:15) Submitted for certification
-* (2016.11.20 @ 20:02) Re-submitted with updates for certification
-
 ## How It Works
 Given a location (string) by a user, we query the Google Maps API for the approximate latitude and longitude corresponding to it. We then query the ADS-B Exchange for any radar data within a 20-kilometer radius and return information about the one flying the lowest.
 
