@@ -1,4 +1,4 @@
-![Logo for Air Traffic Control](https://github.com/ckuzma/atc_alexa/blob/master/misc/atc_large.png)
+![Logo for Air Traffic Control](./misc/atc_icon_large_publish.png)
 
 # atc_alexa
 Air Traffic Control skill for Amazon Alexa. Gives information about what is flying over any location. Submitted as contest entry to the Alexa API Mashup competition on Hackster. (https://www.hackster.io/kuzma/alexa-air-traffic-control-a22a03)
